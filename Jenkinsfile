@@ -19,15 +19,15 @@ pipeline {
                 }
             }
         }
-        stage("docker login") {
+        stage('docker login') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'docker_cred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                    }
-                }
+                    withCredentials([usernamePassword(credentialsId: 'docker_cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASSWORD%'
             }
         }
+    }
+}
         stage("docker push") {
             steps {
                 script {
